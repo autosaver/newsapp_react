@@ -63,15 +63,13 @@ export default class Newswindow extends Component {
 
 
     fetchData = async () => {
-        this.setState({
-            page: this.state.page + 1
-        })
-        let url = `${this.props.baseurl}&page=${this.state.page}&category=${this.props.category}`;
+        let url = `${this.props.baseurl}&page=${this.state.page+1}&category=${this.props.category}`;
         let data = await fetch(url);
         let parseddata = await data.json();
         // console.log(parseddata);
         this.setState({
             articles: this.state.articles.concat(parseddata.articles),
+            page: this.state.page + 1
         });
     };
     
