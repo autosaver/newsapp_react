@@ -66,7 +66,6 @@ export default class Newswindow extends Component {
         let url = `${this.props.baseurl}&page=${this.state.page+1}&category=${this.props.category}`;
         let data = await fetch(url);
         let parseddata = await data.json();
-        // console.log(parseddata);
         this.setState({
             articles: this.state.articles.concat(parseddata.articles),
             page: this.state.page + 1
@@ -85,7 +84,7 @@ export default class Newswindow extends Component {
             {/* {this.state.loading && <Spinner/>}  */}
             <h2 className="text-center" style={{marginTop:'90px'}}>{`Top ${this.props.category} headlines in the India right now`}</h2>
             <InfiniteScroll
-                dataLength={this.state.articles.length} //This is important field to render the next data
+                dataLength={this.state.articles?this.state.articles.length:0} //This is important field to render the next data
                 next={this.fetchData}
                 hasMore={this.state.page !== this.state.total_pages}
                 loader={<Spinner />}
