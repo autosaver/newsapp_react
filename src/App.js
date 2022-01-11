@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import Newswindow from "./components/Newswindow";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+
 
 function App() {
+  let country='in'
+  let baseurl=`https://newsapi.org/v2/top-headlines?country=${country}&apiKey=592ffaaf5a1c472282b206b7647959dc`;
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <Router>
+      <Navbar />
+      <Routes>
+          <Route path="/" element={<Newswindow  key="1" baseurl={baseurl} category={'general'}/>}/>
+          <Route path="/general" element={<Newswindow  key="2" baseurl={baseurl} category={'general'}/>}/>
+          <Route path="/sports" element={<Newswindow  key="3" baseurl={baseurl} category={'sports'}/>}/>
+          <Route path="/technology" element={<Newswindow  key="4" baseurl={baseurl} category={'technology'}/>}/>
+          <Route path="/business" element={<Newswindow  key="5" baseurl={baseurl} category={'business'}/>}/>
+      </Routes>
+      </Router>
     </div>
   );
 }
